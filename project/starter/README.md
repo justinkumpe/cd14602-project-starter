@@ -30,7 +30,7 @@ This is a Python project template for learning AI-assisted software development.
 
 4. **Run tests:**
    ```bash
-   pytest
+   python -m pytest
    ```
 
 ### 🛠️ Development Tools
@@ -59,7 +59,7 @@ This is a Python project template for learning AI-assisted software development.
 
 - **pytest**: Testing framework
   ```bash
-  pytest --cov=. --cov-report=html
+  python -m pytest --cov=. --cov-report=html
   ```
 
 #### Pre-commit Hooks (Optional)
@@ -95,10 +95,10 @@ The project includes comprehensive unit tests demonstrating proper testing pract
 pytest
 
 # Run with coverage report (aim for >80% coverage)
-pytest --cov=. --cov-report=html
+python -m pytest --cov=. --cov-report=html
 
 # Run specific test file with verbose output
-pytest tests/test_task_manager.py -v
+python -m pytest tests/test_task_manager.py -v
 
 # Run all quality checks
 black . && isort . && flake8 . && mypy . && pytest
