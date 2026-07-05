@@ -4,8 +4,9 @@ Generate Function Command
 A Claude slash command to help students generate well-structured Python functions.
 """
 
-import sys
 import argparse
+import sys
+
 
 def main():
     parser = argparse.ArgumentParser(description='Generate a Python function with proper structure')

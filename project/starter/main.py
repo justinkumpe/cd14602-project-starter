@@ -1,36 +1,62 @@
 """
-Main entry point for the AI-assisted development project.
+Flashcard Quizzer CLI entry point.
 
-This is a starter template for students to build upon. The example shows
-a simple task management system that can be extended with AI assistance.
+Parses command-line arguments and delegates session execution to
+``utils.quiz_session``.
 """
 
-from utils.task_manager import TaskManager
-from utils.file_handler import FileHandler
+import argparse
+
+from utils.quiz_session import run_quiz_session
 
 
-def main():
-    """Main function to demonstrate the application structure."""
-    print("Welcome to the AI-Assisted Development Project!")
-    print("=" * 50)
-    
-    # Initialize components
-    task_manager = TaskManager()
-    file_handler = FileHandler()
-    
-    # Example usage - students can extend this
-    task_manager.add_task("Learn about design patterns")
-    task_manager.add_task("Implement new features with AI assistance")
-    task_manager.add_task("Write comprehensive tests")
-    
-    print("\nCurrent tasks:")
-    for task in task_manager.get_all_tasks():
-        print(f"- {task}")
-    
-    # Save tasks to file
-    file_handler.save_data("tasks.json", task_manager.to_dict())
-    print("\nTasks saved to tasks.json")
+def build_parser() -> argparse.ArgumentParser:
+    """
+    Build the command-line argument parser.
+
+    Returns:
+        Configured ``ArgumentParser`` for the Flashcard Quizzer CLI.
+    """
+    parser = argparse.ArgumentParser(
+        description="Flashcard Quizzer - study with JSON flashcard decks.",
+    )
+    parser.add_argument(
+        "-f",
+        "--file",
+        required=True,
+        help="Path to JSON flashcard file",
+    )
+    parser.add_argument(
+        "-m",
+        "--mode",
+        default="sequential",
+        help=(
+            "Quiz mode: sequential, random, or adaptive "
+            "(default: sequential)"
+        ),
+    )
+    parser.add_argument(
+        "--stats",
+        action="store_true",
+        help="Show extra detail in the session summary",
+    )
+    return parser
+
+
+def main(argv: list[str] | None = None) -> int:
+    """
+    Parse CLI arguments and run the Flashcard Quizzer.
+
+    Args:
+        argv: Optional command-line arguments. Defaults to ``sys.argv[1:]``.
+
+    Returns:
+        Process exit code.
+    """
+    parser = build_parser()
+    args = parser.parse_args(argv)
+    return run_quiz_session(args.file, args.mode, args.stats)
 
 
 if __name__ == "__main__":
-    main()
+    raise SystemExit(main())

@@ -4,8 +4,9 @@ Refactor Code Command
 A Claude slash command to help students refactor code with AI assistance.
 """
 
-import sys
 import argparse
+import sys
+
 
 def main():
     parser = argparse.ArgumentParser(description='Generate a refactoring prompt for Claude')

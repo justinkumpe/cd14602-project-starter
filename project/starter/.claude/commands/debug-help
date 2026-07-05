@@ -4,8 +4,9 @@ Debug Help Command
 A Claude slash command to help students debug issues with AI assistance.
 """
 
-import sys
 import argparse
+import sys
+
 
 def main():
     parser = argparse.ArgumentParser(description='Generate a debugging prompt for Claude')
